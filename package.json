@@ -1,0 +1,28 @@
+{
+  "name": "apiclientes",
+  "version": "1.0.0",
+  "description": "Api para gestionar clientes creada en Node.js con Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrespor75/apiclientes.git"
+  },
+  "author": "Adexe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acrespor75/apiclientes/issues"
+  },
+  "homepage": "https://github.com/acrespor75/apiclientes#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
