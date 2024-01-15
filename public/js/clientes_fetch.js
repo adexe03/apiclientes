@@ -5,9 +5,16 @@ const fieldNAME = document.getElementById('nombre');
 const fieldLASTNAME = document.getElementById('apellidos');
 const fieldLOCATION = document.getElementById('localidad');
 
-function addClient() {
-  let tr = document.createElement('tr');
-  tr.innerHTML = `
+function loadClients() {
+  fetch(HOST + 'clientes')
+    .then(res => res.json())
+    .then(json => {
+      let clientes = json.data.clientes;
+      // Rellenar la tabla de clientes.
+      tbody.innerHTML = '';
+      clientes.forEach(client => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
           <td>${client.id}</td>
           <td>${client.nombre}</td>
           <td>${client.apellidos}</td>
@@ -15,31 +22,13 @@ function addClient() {
           <td>
             <img src='img/editar.png' onclick="loadClient(${client.id})">
             <img src='img/eliminar.png' onclick="removeClient(${client.id})">
+
           </td>
         `;
-  tbody.append(tr);
-}
-async function loadClients() {
-  tbody.innerHTML = "<tr><td colspan=\"5\">Cargando datos...</td></tr>";
-  try {
-    const response = await fetch(HOST + 'clientes');
-    if (!response.ok) {
-      if (response.status == 404) {
-        throw new Error('Recurso no encontrado');
-      } else if (response.status == 400) {
-        throw new Error('Campos de búsqueda no son correctos');
-      }
-    }
-    const json = await response.json();
-    let clientes = json.data.clientes;
-    // Rellenar la tabla de clientes
-    tbody.innerHTML = '';
-    clientes.forEach(client => {
-      addClient(client);
+        tbody.append(tr);
+      });
     });
-  } catch (err) {
-    tbody.innerHTML = `<tr><td colspan="5" class="error">${err}</td></tr>`;
-  }
+  tbody.innerHTML = "<tr><td colspan=\"5\">Cargando datos...</td></tr>";
 }
 
 function loadClient(id) {
@@ -91,7 +80,7 @@ function createClient() {
     // No haría falta
     .then(json => {
       console.log(json);
-      addClient(json.data);
+      loadClients();
     });
 }
 

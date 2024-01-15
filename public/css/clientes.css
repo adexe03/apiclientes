@@ -8,7 +8,8 @@ table thead {
     color: white;
 }
 
-td, th {
+td,
+th {
     padding: 5px;
 }
 
@@ -27,4 +28,8 @@ table caption {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 4em;
+}
+
+.error {
+    background-color: lightcoral;
 }
